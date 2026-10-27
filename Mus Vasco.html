@@ -1,0 +1,979 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Mus Vasco</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Hanken+Grotesk:wght@400;500;700;800&display=swap">
+<style>
+/* Concepto: una mesa de txoko. Tapete verde profundo, cartas claras, rojo ikurriña como único acento. */
+:root{
+  --bg:#f1f3ee; --surface:#fbfcf8; --fg:#14231c; --muted:#5a6a61; --line:#d5dcd2;
+  --felt:#1e5c44; --felt2:#143f2f; --felt-fg:#eaf5ec;
+  --accent:#c2212f; --accent-fg:#ffffff; --gold:#c9972b; --gold-fg:#1b1405;
+  --ta:#e2574c; --tb:#e3b448;
+  --card:#fbf8ef; --ink:#1a1a17;
+  --s-oros:#b07d0a; --s-copas:#b3261e; --s-espadas:#25508f; --s-bastos:#2c7a37;
+  --disp:'Alfa Slab One','Rockwell','Georgia',serif;
+  --body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c1511; --surface:#14211b; --fg:#e7efe9; --muted:#93a59a; --line:#27382f;
+    --felt:#17503b; --felt2:#0e3326; --felt-fg:#eaf5ec;
+    --accent:#e8465a; --gold:#e0b04a;
+    --card:#efebe0; --ink:#1a1a17;
+    --s-oros:#a8730a; --s-copas:#b3261e; --s-espadas:#25508f; --s-bastos:#2c7a37;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c1511; --surface:#14211b; --fg:#e7efe9; --muted:#93a59a; --line:#27382f;
+  --felt:#17503b; --felt2:#0e3326; --felt-fg:#eaf5ec;
+  --accent:#e8465a; --gold:#e0b04a;
+  --card:#efebe0; --ink:#1a1a17;
+  --s-oros:#a8730a; --s-copas:#b3261e; --s-espadas:#25508f; --s-bastos:#2c7a37;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-block:12px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+h1,h2,h3{font-family:var(--disp);font-weight:400;letter-spacing:.01em;text-wrap:balance;margin:0}
+p{margin:0}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;min-width:0}
+.brand b{font-family:var(--disp);font-weight:400;font-size:34px;line-height:1;color:var(--accent)}
+.brand span{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{font-size:13px;font-weight:700;padding:6px 12px;border-radius:99px;background:var(--surface);border:1px solid var(--line);color:var(--muted);display:inline-flex;gap:8px;align-items:center}
+.pill i{width:9px;height:9px;border-radius:50%;background:#7a8a80;display:inline-block}
+.pill.on i{background:#34a853}
+.pill.off i{background:var(--accent)}
+.btn{min-height:44px;padding:10px 18px;border-radius:12px;border:2px solid transparent;background:var(--accent);color:var(--accent-fg);font-weight:800;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn:hover{filter:brightness(1.07)}
+.btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--fg)}
+.btn.gold{background:var(--gold);color:var(--gold-fg)}
+.btn.sm{min-height:36px;padding:6px 12px;font-size:14px;border-radius:10px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.col{display:flex;flex-direction:column;gap:12px;min-width:0}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+input[type=text],select{font:inherit;font-size:17px;font-weight:600;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px 14px;min-height:46px;width:100%;min-width:0}
+input[type=text]:focus,select:focus{border-color:var(--gold);outline:none}
+.codein{font-family:var(--disp)!important;letter-spacing:.3em;text-transform:uppercase;text-align:center;font-size:22px!important}
+.hero{display:flex;flex-direction:column;gap:10px;padding-block:8px 4px}
+.hero h1{font-size:clamp(30px,6vw,54px);line-height:1.05}
+.hero p{max-width:60ch;color:var(--muted);font-size:17px}
+.note{font-size:14px;color:var(--muted)}
+.warn{background:color-mix(in srgb,var(--gold) 18%,var(--surface));border:1px solid var(--gold);border-radius:12px;padding:10px 14px;font-size:14px}
+.bad{background:color-mix(in srgb,var(--accent) 14%,var(--surface));border:1px solid var(--accent);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:700}
+/* lobby */
+.code{font-family:var(--disp);font-size:clamp(40px,12vw,76px);letter-spacing:.22em;line-height:1;color:var(--accent);padding-left:.22em}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+.pair{border:2px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pair h3{font-size:18px}
+.pair.t0{border-color:var(--ta)} .pair.t1{border-color:var(--tb)}
+.slot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-radius:12px;background:var(--bg);min-height:56px;border:2px solid transparent;flex-wrap:wrap}
+.slot.sel{border-color:var(--gold)}
+.slot .who{font-weight:800;min-width:0;overflow-wrap:anywhere}
+.slot .who small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.slot .ctl{display:flex;gap:6px;flex-wrap:wrap}
+.slot.empty .who{color:var(--muted);font-weight:500}
+/* table */
+.felt{background:radial-gradient(120% 95% at 50% 38%,var(--felt) 0%,var(--felt2) 100%);color:var(--felt-fg);border-radius:24px;padding:12px;
+  display:grid;grid-template-columns:minmax(70px,.7fr) minmax(0,2fr) minmax(70px,.7fr);grid-template-areas:". top ." "left mid right" "me me me";gap:8px;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.08),0 6px 24px rgba(0,0,0,.18)}
+.seat{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;position:relative;padding:6px;border-radius:14px}
+.p0{grid-area:me}.p1{grid-area:right}.p2{grid-area:top}.p3{grid-area:left}
+.seat.turn{background:rgba(255,255,255,.1);box-shadow:0 0 0 2px var(--gold)}
+.seat .nm{display:flex;flex-direction:column;align-items:center;gap:1px;font-weight:800;font-size:14px;text-align:center;max-width:100%}
+.seat .nm span{max-width:100%;overflow-wrap:anywhere;line-height:1.15}
+.seat .nm em{font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.8;font-weight:700}
+.seat .tm{height:4px;width:36px;border-radius:2px}
+.seat.team0 .tm{background:var(--ta)} .seat.team1 .tm{background:var(--tb)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:#7a8a80}
+.dot.on{background:#5fd07c} .dot.off{background:var(--accent)}
+.hand{display:flex;justify-content:center;min-height:36px}
+.seat:not(.p0) .hand .card{--cw:24px;margin-left:-11px}
+.seat:not(.p0) .hand .card:first-child{margin-left:0}
+.seat:not(.p0) .hand.rv{display:grid;grid-template-columns:repeat(2,32px);gap:3px}
+.seat:not(.p0) .hand.rv .card{--cw:32px;margin:0}
+.seat.p2 .hand.rv{display:flex}.seat.p2 .hand.rv .card{--cw:40px;margin-left:-8px}.seat.p2 .hand.rv .card:first-child{margin-left:0}
+.p0 .hand{gap:8px;flex-wrap:wrap}
+.p0 .hand .card{--cw:clamp(54px,17vw,80px)}
+.cardbtn{background:none;border:0;padding:0;cursor:pointer;border-radius:10px;transition:transform .12s}
+.cardbtn.sel{transform:translateY(-14px)}
+.cardbtn.sel .card{outline:3px solid var(--gold);outline-offset:1px}
+.card{--cw:56px;width:var(--cw);aspect-ratio:5/7.2;border-radius:calc(var(--cw)*.12);background:var(--card);color:var(--ink);position:relative;overflow:hidden;flex:none;
+  box-shadow:0 1px 0 rgba(0,0,0,.3),0 3px 8px rgba(0,0,0,.28);font-size:calc(var(--cw)*.27)}
+.card.f.s0{color:var(--s-oros)}.card.f.s1{color:var(--s-copas)}.card.f.s2{color:var(--s-espadas)}.card.f.s3{color:var(--s-bastos)}
+.card .n{position:absolute;left:.28em;top:.18em;font-family:var(--disp);font-weight:400;font-size:1.2em;line-height:1}
+.card .su{position:absolute;left:50%;top:50%;width:58%;height:auto;aspect-ratio:1;transform:translate(-50%,-46%)}
+.card .nn{position:absolute;bottom:.28em;left:0;right:0;text-align:center;font-style:normal;font-size:.46em;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.card.bk{background:repeating-linear-gradient(45deg,var(--felt2) 0 4px,var(--felt) 4px 8px);border:2px solid var(--card)}
+.mid{grid-area:mid;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-width:0;padding:4px}
+.chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;width:100%}
+.chip{display:flex;flex-direction:column;align-items:center;padding:6px 4px;border-radius:10px;background:rgba(0,0,0,.2);min-width:0;border:2px solid transparent}
+.chip b{font-family:var(--disp);font-weight:400;font-size:14px}
+.chip small{font-size:11px;opacity:.85;min-height:1.2em;text-align:center}
+.chip.cur{border-color:var(--gold);background:rgba(255,255,255,.14)}
+.chip.done{opacity:.9}
+.bet{font-weight:800;font-size:15px;text-align:center;background:var(--gold);color:var(--gold-fg);padding:6px 12px;border-radius:99px;max-width:100%}
+.bubble{position:absolute;top:-6px;right:-4px;background:var(--gold);color:var(--gold-fg);font-weight:800;font-size:12px;padding:3px 9px;border-radius:99px;box-shadow:0 2px 6px rgba(0,0,0,.3);z-index:2}
+.me-info{font-size:13px;opacity:.9;font-weight:600;text-align:center}
+/* barra de acciones */
+.bar{display:flex;flex-direction:column;gap:10px}
+.bar h2{font-size:22px}
+.bar .sub{color:var(--muted);font-size:15px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.stp{display:inline-flex;align-items:center;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.stp button{width:40px;min-height:40px;border:0;background:var(--bg);color:var(--fg);font-size:20px;font-weight:800;cursor:pointer}
+.stp b{min-width:36px;text-align:center;font-weight:800}
+.grp{display:inline-flex;align-items:center;gap:6px}
+.grp2{display:flex;gap:8px;flex-wrap:wrap}
+.side{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.team{display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:14px;border:2px solid var(--line);min-width:0}
+.team.t0{border-color:var(--ta)}.team.t1{border-color:var(--tb)}
+.team .tn{font-weight:800;overflow-wrap:anywhere}
+.team .score{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.team .score b{font-family:var(--disp);font-weight:400;font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.team .score span{color:var(--muted);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.ams{display:flex;gap:6px;flex-wrap:wrap}
+.am{display:inline-grid;grid-template-columns:repeat(5,7px);gap:2px;padding:4px;border:1px solid var(--line);border-radius:6px}
+.am i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.am i.on{background:var(--fg)}
+.team.t0 .am i.on{background:var(--ta)}.team.t1 .am i.on{background:var(--tb)}
+.vaca{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);font-weight:700}
+.vaca i{width:14px;height:14px;border-radius:4px;border:2px solid var(--line)}
+.vaca i.on{background:var(--gold);border-color:var(--gold)}
+.logl{display:flex;flex-direction:column;gap:4px;font-size:14px;margin:0;padding:0;list-style:none}
+.logl li{color:var(--muted);overflow-wrap:anywhere}
+.logl li:first-child{color:var(--fg);font-weight:700}
+.res{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none;font-size:15px}
+.res li{padding:8px 12px;border-radius:10px;background:var(--bg);overflow-wrap:anywhere}
+.senas{display:flex;gap:8px;flex-wrap:wrap}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{min-height:40px;padding:8px 14px;border-radius:99px;border:2px solid var(--line);background:transparent;color:var(--fg);font-weight:700;cursor:pointer;font-size:15px}
+.tab[aria-selected=true]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.guide{max-width:72ch;display:flex;flex-direction:column;gap:14px}
+.guide h2{font-size:26px}
+.guide h3{font-size:19px;margin-top:6px}
+.guide ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.tblw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:420px;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td b{font-variant-numeric:tabular-nums}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+.kv dt{font-weight:800}.kv dd{margin:0}
+.mini{display:inline-flex;gap:4px;align-items:center;vertical-align:middle}
+.mini .card{--cw:30px;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:700;z-index:50;max-width:min(92vw,460px);text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+@media (prefers-reduced-motion:reduce){.cardbtn{transition:none}}
+@media (max-width:420px){.brand b{font-size:28px}.brand span{display:none}.btn{padding:10px 14px}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="su0" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="currentColor"/><circle cx="16" cy="16" r="8.5" fill="none" stroke="var(--card)" stroke-width="2"/><circle cx="16" cy="16" r="3.2" fill="var(--card)"/></symbol>
+  <symbol id="su1" viewBox="0 0 32 32"><path d="M5 3h22c0 10-4.5 15.5-11 15.5S5 13 5 3z" fill="currentColor"/><path d="M16 18v8M10 29h12" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" fill="none"/></symbol>
+  <symbol id="su2" viewBox="0 0 32 32"><path d="M16 1.5L20 20h-8z" fill="currentColor"/><path d="M7.5 21.5h17" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><path d="M16 21.5v8" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/></symbol>
+  <symbol id="su3" viewBox="0 0 32 32"><g transform="rotate(35 16 16)"><rect x="12" y="1.5" width="8" height="29" rx="4" fill="currentColor"/><circle cx="16" cy="9" r="2.1" fill="var(--card)"/><circle cx="16" cy="22" r="2.1" fill="var(--card)"/></g></symbol>
+</svg>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><b>Mus</b><span>4 reyes · Euskal Herria</span></div>
+    <div class="nav" id="nav"></div>
+  </header>
+  <main id="app"></main>
+</div>
+<div id="toast" role="status" hidden></div>
+
+<script>
+(function () {
+'use strict';
+// ===== MOTOR DEL MUS VASCO (4 reyes) =====
+// Baraja de 40 cartas. id = palo*10 + posición (0..9) -> rangos 1..7, 10, 11, 12.
+// A 4 reyes el 3 y el 2 conservan su valor (no son reyes ni ases).
+const RANKS = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12];
+const SUITS = ['oros', 'copas', 'espadas', 'bastos'];
+const RN = { 1: 'As', 2: 'Dos', 3: 'Tres', 4: 'Cuatro', 5: 'Cinco', 6: 'Seis', 7: 'Siete', 10: 'Sota', 11: 'Caballo', 12: 'Rey' };
+const RN_PL = { 1: 'ases', 2: 'doses', 3: 'treses', 4: 'cuatros', 5: 'cincos', 6: 'seises', 7: 'sietes', 10: 'sotas', 11: 'caballos', 12: 'reyes' };
+const LN = ['Grande', 'Chica', 'Pares', 'Juego'];
+const rankOf = id => RANKS[id % 10];
+const suitOf = id => (id / 10) | 0;
+const valOf = id => Math.min(rankOf(id), 10);
+const STR = { 1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 7: 6, 10: 7, 11: 8, 12: 9 };
+const strOf = id => STR[rankOf(id)];
+const JORD = [33, 34, 35, 36, 37, 40, 32, 31]; // de peor a mejor juego
+const cmpArr = (a, b) => { for (let i = 0; i < Math.min(a.length, b.length); i++) if (a[i] !== b[i]) return a[i] - b[i]; return 0; };
+const sum = h => h.reduce((a, c) => a + valOf(c), 0);
+const hasJuego = h => sum(h) >= 31;
+
+function paresOf(h) {
+  const c = {};
+  h.forEach(id => { const s = strOf(id); c[s] = (c[s] || 0) + 1; });
+  const g = Object.keys(c).map(s => ({ s: +s, n: c[s] })).sort((a, b) => b.n - a.n || b.s - a.s);
+  if (g[0].n === 4) return { t: 3, k: [g[0].s, g[0].s] };
+  if (g[0].n === 3) return { t: 2, k: [g[0].s] };
+  if (g[0].n === 2 && g[1] && g[1].n === 2) return { t: 3, k: [Math.max(g[0].s, g[1].s), Math.min(g[0].s, g[1].s)] };
+  if (g[0].n === 2) return { t: 1, k: [g[0].s] };
+  return null;
+}
+
+// Clave de comparación: mayor es mejor.
+function lanceKey(l, punto, h) {
+  if (l === 0) return h.map(strOf).sort((a, b) => b - a);
+  if (l === 1) return h.map(strOf).sort((a, b) => a - b).map(x => -x);
+  if (l === 2) { const p = paresOf(h); return p ? [p.t].concat(p.k) : [0]; }
+  if (punto) return [sum(h)];
+  return [JORD.indexOf(sum(h))];
+}
+// Gana el mejor; en empate gana el más cercano a la mano (orden de habla).
+function bestSeat(l, punto, hands, ord) {
+  let best = -1, bk = null;
+  for (const s of ord) {
+    const k = lanceKey(l, punto, hands[s]);
+    if (bk === null || cmpArr(k, bk) > 0) { best = s; bk = k; }
+  }
+  return best;
+}
+
+function describe(h) {
+  const p = paresOf(h);
+  const names = ['', 'Pareja', 'Medias', 'Duples'];
+  let pn = 'Sin pares';
+  if (p) pn = names[p.t];
+  const s = sum(h);
+  return pn + ' · ' + (s >= 31 ? 'Juego ' + s : 'Punto ' + s);
+}
+
+// ---------- utilidades de estado ----------
+const ordFrom = m => [m, (m + 1) % 4, (m + 2) % 4, (m + 3) % 4];
+const nm = (S, s) => (S.seats[s] && S.seats[s].n) || ('Jugador ' + (s + 1));
+const tn = (S, t) => nm(S, t) + ' y ' + nm(S, t + 2);
+function log(S, t) { S.log.push(t); while (S.log.length > 8) S.log.shift(); }
+function shuffleArr(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function pub(S) { const o = {}; for (const k in S) if (k[0] !== '_') o[k] = S[k]; return o; }
+
+function newState(code, cfg) {
+  return {
+    code, v: 0, phase: 'lobby', seats: [null, null, null, null],
+    cfg: Object.assign({ target: 30, juegos: 3 }, cfg || {}),
+    dealer: 3, mano: 0, hands: [[], [], [], []], reveal: false,
+    sc: [0, 0], jw: [0, 0], turn: -1, lance: 0, b: null, lr: [null, null, null, null],
+    act: [null, null, null, null], punto: false, disc: [false, false, false, false],
+    musN: 0, log: [], res: [], hn: 0, fin: null, _deck: [], _dis: [], _pend: {}
+  };
+}
+
+function newGame(S) {
+  S.sc = [0, 0]; S.jw = [0, 0]; S.hn = 0; S.dealer = 3; S.mano = 0; S.log = []; S.fin = null;
+  startHand(S);
+}
+function nextHand(S) {
+  if (S.fin && !S.fin.over) S.sc = [0, 0];
+  S.dealer = (S.dealer + 1) % 4; S.mano = (S.dealer + 1) % 4;
+  startHand(S);
+}
+function startHand(S) {
+  S.hn++;
+  S._deck = shuffleArr(Array.from({ length: 40 }, (_, i) => i)); S._dis = []; S._pend = {};
+  S.hands = [[], [], [], []];
+  for (let r = 0; r < 4; r++) for (let i = 0; i < 4; i++) S.hands[(S.mano + i) % 4].push(S._deck.pop());
+  S.phase = 'mus'; S.turn = S.mano; S.musN = 0; S.lance = 0;
+  S.lr = [null, null, null, null]; S.act = [null, null, null, null]; S.punto = false; S.b = null;
+  S.res = []; S.reveal = false; S.fin = null; S.disc = [false, false, false, false];
+  log(S, 'Mano ' + S.hn + ': reparte ' + nm(S, S.dealer) + ', habla primero ' + nm(S, S.mano));
+}
+
+// ---------- mus y descarte ----------
+function musAct(S, seat, yes) {
+  if (S.phase !== 'mus' || S.turn !== seat) return false;
+  if (yes) {
+    S.musN++; log(S, nm(S, seat) + ': mus');
+    if (S.musN >= 4) { S.phase = 'discard'; S.turn = -1; S.disc = [false, false, false, false]; S._pend = {}; log(S, 'Todos quieren mus: a descartar'); }
+    else S.turn = (seat + 1) % 4;
+  } else {
+    log(S, nm(S, seat) + ': no hay mus');
+    S.phase = 'play'; S.lance = 0; beginLance(S);
+  }
+  return true;
+}
+function discAct(S, seat, c) {
+  if (S.phase !== 'discard' || S.disc[seat] || !Array.isArray(c)) return false;
+  const u = Array.from(new Set(c.map(Number))).filter(i => Number.isInteger(i) && i >= 0 && i < 4);
+  if (u.length < 1 || u.length !== c.length) return false;
+  S.disc[seat] = true; S._pend[seat] = u;
+  if (S.disc.every(Boolean)) {
+    for (const s of ordFrom(S.mano)) {
+      const idx = S._pend[s];
+      for (const i of idx) S._dis.push(S.hands[s][i]);
+      for (const i of idx) {
+        if (!S._deck.length) { S._deck = shuffleArr(S._dis); S._dis = []; }
+        S.hands[s][i] = S._deck.pop();
+      }
+      log(S, nm(S, s) + ' descarta ' + idx.length);
+    }
+    S._pend = {}; S.phase = 'mus'; S.turn = S.mano; S.musN = 0; S.disc = [false, false, false, false];
+  }
+  return true;
+}
+
+// ---------- lances y envites ----------
+function respSeat(b, from) {
+  const r = [(from + 1) % 4, (from + 3) % 4].find(s => b.ord.includes(s));
+  return r === undefined ? from : r;
+}
+function beginLance(S) {
+  const l = S.lance;
+  if (l > 3) { recuento(S); return; }
+  const order = ordFrom(S.mano);
+  let act = order, punto = false;
+  if (l === 2 || l === 3) {
+    const has = l === 2 ? (h => !!paresOf(h)) : hasJuego;
+    act = order.filter(s => has(S.hands[s]));
+    if (l === 3 && act.length === 0) { punto = true; act = order; S.punto = true; log(S, 'Nadie tiene juego: se juega al punto'); }
+    else log(S, (l === 2 ? 'Pares: ' : 'Juego: ') + order.map(s => nm(S, s) + (act.includes(s) ? ' sí' : ' no')).join(' · '));
+    if (!punto) {
+      const t0 = act.some(s => s % 2 === 0), t1 = act.some(s => s % 2 === 1);
+      S.act[l] = act;
+      if (act.length === 0) { S.lr[l] = { k: 'none' }; S.lance++; beginLance(S); return; }
+      if (!(t0 && t1)) { S.lr[l] = { k: 'uno', team: t0 ? 0 : 1 }; S.lance++; beginLance(S); return; }
+    }
+  }
+  S.act[l] = act;
+  S.b = { mode: 'open', ord: act, pos: 0, who: act[0], team: -1, last: -1, stake: 0, prev: 0, og: false };
+  S.turn = act[0]; S.phase = 'play';
+}
+function nextLance(S) { S.lance++; S.b = null; beginLance(S); }
+function addPts(S, team, n) { S.sc[team] += n; return S.sc[team] >= S.cfg.target; }
+
+function endJuego(S, team) {
+  S.jw[team]++; S.sc[team] = Math.min(S.sc[team], S.cfg.target);
+  const need = (S.cfg.juegos + 1) / 2;
+  S.fin = { team, over: S.jw[team] >= need };
+  S.res.push('¡' + (S.cfg.juegos > 1 && !S.fin.over ? 'Juego' : (S.cfg.juegos > 1 ? 'Vaca' : 'Partida')) + ' para ' + tn(S, team) + '!');
+  S.phase = S.fin.over ? 'over' : 'recuento'; S.reveal = true; S.turn = -1; S.b = null;
+}
+function resolveOrdago(S) {
+  const l = S.lance, b = S.b;
+  const w = bestSeat(l, S.punto && l === 3, S.hands, b.ord), team = w % 2;
+  S.reveal = true; S.lr[l] = { k: 'og', team };
+  S.res = [LN[l] + (S.punto && l === 3 ? ' (punto)' : '') + ': ¡órdago aceptado! Gana ' + tn(S, team)];
+  S.sc[team] = S.cfg.target;
+  endJuego(S, team);
+}
+function betAct(S, seat, a) {
+  if (S.phase !== 'play' || !S.b || S.turn !== seat) return false;
+  const b = S.b, l = S.lance, k = a.k, N = nm(S, seat);
+  const n = Math.max(2, Math.min(20, Math.floor(+a.n) || 2));
+  if (b.mode === 'open') {
+    if (k === 'paso') {
+      log(S, N + ': paso'); b.pos++;
+      if (b.pos >= b.ord.length) { S.lr[l] = { k: 'pass' }; nextLance(S); return true; }
+      b.who = S.turn = b.ord[b.pos]; return true;
+    }
+    if (k === 'env' || k === 'og') {
+      b.mode = 'resp'; b.team = seat % 2; b.prev = 0; b.last = seat; b.og = k === 'og';
+      b.stake = k === 'og' ? 0 : Math.min(n, S.cfg.target);
+      b.who = S.turn = respSeat(b, seat);
+      log(S, k === 'og' ? N + ': ¡ÓRDAGO!' : N + ' envida ' + b.stake);
+      return true;
+    }
+    return false;
+  }
+  if (k === 'q') {
+    log(S, N + ': quiero');
+    if (b.og) { resolveOrdago(S); return true; }
+    S.lr[l] = { k: 'acc', st: b.stake }; nextLance(S); return true;
+  }
+  if (k === 'nq') {
+    const pay = Math.max(b.prev, 1), team = b.team;
+    log(S, N + ': no quiero (+' + pay + ' para ' + nm(S, team) + ')');
+    S.lr[l] = { k: 'fold', team };
+    if (addPts(S, team, pay)) { S.res = [LN[l] + ': no quiso. +' + pay + ' para ' + tn(S, team)]; endJuego(S, team); return true; }
+    nextLance(S); return true;
+  }
+  if (b.og) return false;
+  if (k === 'env' || k === 'og') {
+    b.prev = b.stake; b.team = seat % 2; b.last = seat;
+    if (k === 'og') { b.og = true; b.stake = 0; log(S, N + ': ¡ÓRDAGO!'); }
+    else { b.stake = Math.min(b.stake + n, S.cfg.target); log(S, N + ' sube a ' + b.stake); }
+    b.who = S.turn = respSeat(b, seat); return true;
+  }
+  return false;
+}
+
+// ---------- recuento ----------
+function bonusTeam(S, l, team, act) {
+  let t = 0;
+  for (const s of act) if (s % 2 === team) {
+    const h = S.hands[s];
+    t += l === 2 ? paresOf(h).t : (sum(h) === 31 ? 3 : 2);
+  }
+  return t;
+}
+function recuento(S) {
+  S.phase = 'recuento'; S.reveal = true; S.turn = -1; S.b = null;
+  const res = [];
+  for (let l = 0; l < 4; l++) {
+    const r = S.lr[l];
+    if (!r || r.k === 'none') continue;
+    const act = S.act[l] || [], punto = l === 3 && S.punto;
+    let team = -1, pts = 0, why = '';
+    const bonus = tm => l === 2 ? bonusTeam(S, 2, tm, act) : (l === 3 ? (punto ? 1 : bonusTeam(S, 3, tm, act)) : 0);
+    if (r.k === 'fold') { team = r.team; pts = bonus(team); why = 'sin ver cartas'; }
+    else if (r.k === 'uno') { team = r.team; pts = bonus(team); why = 'solo ellos'; }
+    else {
+      const w = bestSeat(l, punto, S.hands, act); team = w % 2;
+      const base = r.k === 'acc' ? r.st : (l < 2 ? 1 : 0);
+      pts = base + bonus(team);
+      why = r.k === 'acc' ? 'envite de ' + r.st : 'paso';
+    }
+    res.push(LN[l] + (punto ? ' (punto)' : '') + ': ' + tn(S, team) + (pts ? ' +' + pts : ' +0') + ' (' + why + ')');
+    if (pts > 0 && addPts(S, team, pts)) { S.res = res; endJuego(S, team); return; }
+  }
+  S.res = res;
+}
+
+// ---------- acciones ----------
+function act(S, seat, a) {
+  if (!a || typeof a !== 'object' || seat < 0) return false;
+  switch (a.a) {
+    case 'mus': return musAct(S, seat, !!a.y);
+    case 'disc': return discAct(S, seat, a.c);
+    case 'bet': return ['paso', 'env', 'og', 'q', 'nq'].includes(a.k) && betAct(S, seat, a);
+    case 'next': if (S.phase === 'recuento') { nextHand(S); return true; } return false;
+    case 'again': if (S.phase === 'over') { newGame(S); return true; } return false;
+  }
+  return false;
+}
+
+// ---------- señas (solo se permite la verdad) ----------
+const SENAS = {
+  '31': { t: '31', ok: h => sum(h) === 31 },
+  'duples': { t: 'Duples', ok: h => { const p = paresOf(h); return !!p && p.t === 3; } },
+  'medias': { t: 'Medias', ok: h => { const p = paresOf(h); return !!p && p.t === 2; } },
+  'pares': { t: 'Pareja', ok: h => { const p = paresOf(h); return !!p && p.t === 1; } },
+  'ciego': { t: 'Ciego', ok: h => !paresOf(h) && sum(h) < 31 },
+  'r2': { t: 'Dos reyes', ok: h => h.filter(c => rankOf(c) === 12).length === 2 },
+  'r3': { t: 'Tres reyes', ok: h => h.filter(c => rankOf(c) === 12).length === 3 }
+};
+
+// ---------- bots ----------
+function strength(l, h, punto) {
+  if (l === 0) { const k = h.filter(c => rankOf(c) === 12).length, c = h.filter(c => rankOf(c) === 11).length; return Math.min(1, .1 + k * .3 + c * .15); }
+  if (l === 1) { const a = h.filter(c => rankOf(c) <= 2).length, t = h.filter(c => rankOf(c) === 3).length; return Math.min(1, .1 + a * .3 + t * .12); }
+  if (l === 2) { const p = paresOf(h); return p ? [0, .55, .78, .95][p.t] : 0; }
+  const s = sum(h);
+  if (punto) return Math.min(1, s / 30 * .9);
+  return s === 31 ? 1 : s === 32 ? .9 : s === 40 ? .8 : s >= 36 ? .65 : .5;
+}
+function botMus(S, seat) {
+  const h = S.hands[seat], s = sum(h), p = paresOf(h), fig = h.filter(c => rankOf(c) >= 10).length;
+  let keep = (p && p.t >= 2) || (s >= 31 && s <= 37) || fig >= 3 || (p && p.t === 1 && fig >= 2);
+  if (Math.random() < .15) keep = !keep;
+  return { a: 'mus', y: !keep };
+}
+function botDisc(S, seat) {
+  const h = S.hands[seat], cnt = {};
+  h.forEach(c => { cnt[rankOf(c)] = (cnt[rankOf(c)] || 0) + 1; });
+  let idx = [];
+  h.forEach((c, i) => { if (rankOf(c) < 10 && cnt[rankOf(c)] < 2) idx.push(i); });
+  if (!idx.length) { let lo = 0; h.forEach((c, i) => { if (strOf(c) < strOf(h[lo])) lo = i; }); idx = [lo]; }
+  return { a: 'disc', c: idx };
+}
+function botBet(S, seat) {
+  const b = S.b, l = S.lance, s = strength(l, S.hands[seat], S.punto && l === 3) + (Math.random() - .5) * .2;
+  if (b.mode === 'open') {
+    if (s > .97 && Math.random() < .06) return { a: 'bet', k: 'og' };
+    if (s > .78 && Math.random() < .65) return { a: 'bet', k: 'env', n: 2 };
+    if (s > .5 && Math.random() < .12) return { a: 'bet', k: 'env', n: 2 };
+    return { a: 'bet', k: 'paso' };
+  }
+  if (b.og) return { a: 'bet', k: s > .92 ? 'q' : 'nq' };
+  if (s > .9 && Math.random() < .2) return { a: 'bet', k: 'env', n: 2 };
+  const lim = b.stake <= 2 ? .45 : b.stake <= 5 ? .62 : .8;
+  return { a: 'bet', k: s > lim ? 'q' : 'nq' };
+}
+function botTodo(S) {
+  const out = [], isBot = s => s >= 0 && S.seats[s] && S.seats[s].p === 'bot';
+  if (S.phase === 'mus' && isBot(S.turn)) out.push({ seat: S.turn, a: botMus(S, S.turn) });
+  else if (S.phase === 'discard') { for (let s = 0; s < 4; s++) if (isBot(s) && !S.disc[s]) out.push({ seat: s, a: botDisc(S, s) }); }
+  else if (S.phase === 'play' && S.b && isBot(S.turn)) out.push({ seat: S.turn, a: botBet(S, S.turn) });
+  return out;
+}
+
+if (typeof module !== 'undefined') {
+  module.exports = { RANKS, paresOf, lanceKey, bestSeat, sum, newState, newGame, act, botTodo, pub, valOf, rankOf, strOf, describe, SENAS, nextHand, JORD };
+}
+
+
+// =================== APLICACIÓN ===================
+const $app = document.getElementById('app'), $nav = document.getElementById('nav'), $toast = document.getElementById('toast');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const SUIT_L = ['oros', 'copas', 'espadas', 'bastos'];
+const BOTN = ['Ane', 'Iker', 'Maite', 'Mikel', 'Nerea', 'Unai', 'Leire', 'Jon', 'Amaia', 'Gorka'];
+
+let view = 'home', guideBack = 'home', guideTab = 'basico';
+let S = null, isHost = false, nr = null, lobbyRoom = null, roomAvail = null;
+let myPeer = null, hostPeer = null, roomCode = '', connected = false, joinedAt = 0;
+let myName = '', codeIn = '', stepN = 2, swapSel = -1, showSenas = false, busyMsg = '';
+let selDisc = new Set(), senaShow = [], fullFlag = false, probing = false, collided = false;
+let hb = 0, botT = 0, helloT = 0, toastT = 0;
+try { myName = localStorage.getItem('mus-name') || ''; } catch (e) {}
+
+function toast(m) { $toast.textContent = m; $toast.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { $toast.hidden = true; }, 3600); }
+function saveName() { try { localStorage.setItem('mus-name', myName); } catch (e) {} }
+function savedHost() { try { const d = JSON.parse(localStorage.getItem('mus-host') || 'null'); if (d && d.S && d.code && Date.now() - d.at < 12 * 3600e3) return d; } catch (e) {} return null; }
+function saveHost() { if (!isHost || !nr || !S) return; try { localStorage.setItem('mus-host', JSON.stringify({ code: S.code, at: Date.now(), S })); } catch (e) {} }
+function clearHost() { try { localStorage.removeItem('mus-host'); } catch (e) {} }
+const cleanName = () => (myName.trim().slice(0, 14) || 'Jugador');
+const genCode = () => { const a = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let c = ''; for (let i = 0; i < 5; i++) c += a[Math.floor(Math.random() * a.length)]; return c; };
+const peerSet = () => new Set(nr ? nr.peers().map(p => p.peer) : []);
+
+// ---------- red ----------
+function emit(d) { if (nr) nr.emit('m', d).catch(() => {}); }
+function attach(room) {
+  nr = room; connected = room.connected(); joinedAt = Date.now();
+  room.on('m', onMsg, () => {});
+  room.onPeers(ch => {
+    if (isHost && S && S.phase === 'lobby') {
+      let changed = false;
+      ch.left.forEach(p => { const i = S.seats.findIndex(s => s && s.p === p.peer); if (i >= 0 && !S.seats[i].h) { S.seats[i] = null; changed = true; } });
+      if (changed) { afterChange(); return; }
+    }
+    if (view !== 'home') render();
+  }, () => {});
+  room.onConnection(c => { connected = c; render(); }, () => {});
+}
+function broadcast() {
+  if (!nr || !S) return;
+  const p = pub(S); let str = JSON.stringify({ t: 's', s: p });
+  while (str.length > 3800 && p.log.length > 1) { p.log.shift(); str = JSON.stringify({ t: 's', s: p }); }
+  emit({ t: 's', s: p });
+}
+function onMsg(m) {
+  const d = m.data;
+  if (!d || typeof d !== 'object') return;
+  if (m.sameTab) { const first = !myPeer; myPeer = m.peer; if (first && isHost) afterChange(); return; }
+  if (isHost) hostHandle(m, d); else clientHandle(m, d);
+}
+
+// ---------- anfitrión ----------
+function mySeat() {
+  if (!S) return -1;
+  if (isHost) return S.seats.findIndex(s => s && s.h);
+  return myPeer ? S.seats.findIndex(s => s && s.p === myPeer) : -1;
+}
+function seatIn(peer, name) {
+  if (S.seats.some(s => s && s.p === peer)) return;
+  const here = peerSet();
+  let i = S.seats.findIndex(s => s && s.p !== 'bot' && !s.h && s.n === name && (!s.p || !here.has(s.p)));
+  if (i >= 0) { S.seats[i].p = peer; return; }
+  i = S.phase === 'lobby' ? S.seats.findIndex(s => !s) : -1;
+  if (i >= 0) { S.seats[i] = { n: name, p: peer }; return; }
+  emit({ t: 'full', p: peer });
+}
+function hostHandle(m, d) {
+  if (!S) return;
+  if (d.t === 'probe' || d.t === 'hello') {
+    if (d.t === 'hello') seatIn(m.peer, String(d.n || '').slice(0, 14) || 'Jugador');
+    afterChange(); return;
+  }
+  const seat = S.seats.findIndex(s => s && s.p === m.peer);
+  if (seat < 0) return;
+  if (d.t === 'a') { if (act(S, seat, d.a)) afterChange(); }
+  else if (d.t === 'sena') doSena(seat, d.s);
+}
+function doSena(seat, key) {
+  const def = SENAS[key];
+  if (!def || !['mus', 'discard', 'play'].includes(S.phase)) return;
+  if (!def.ok(S.hands[seat])) {
+    if (seat === mySeat()) toast('Esa seña sería falsa: no se puede mentir.');
+    else emit({ t: 'err', p: S.seats[seat].p, m: 'Esa seña sería falsa: no se puede mentir.' });
+    return;
+  }
+  emit({ t: 'sena', f: seat, s: key }); showSena(seat, key);
+  if (seat === mySeat()) toast('Seña enviada a tu compañero: ' + def.t);
+}
+function showSena(f, k) {
+  const me = mySeat();
+  if (me < 0 || f === me || f % 2 !== me % 2) return;
+  senaShow.push({ f, k, t: Date.now() }); render();
+  setTimeout(() => { senaShow = senaShow.filter(x => Date.now() - x.t < 6000); render(); }, 6100);
+}
+function afterChange() {
+  if (!S) return;
+  if (isHost) {
+    S.v++; S.hp = myPeer || null; fillView();
+    const hs = S.seats.find(s => s && s.h); if (hs && myPeer) hs.p = myPeer;
+    broadcast(); saveHost(); schedBots();
+  }
+  render();
+}
+function schedBots() {
+  if (!isHost || botT || !S || !botTodo(S).length) return;
+  botT = setTimeout(() => {
+    botT = 0; if (!S) return;
+    const todo = botTodo(S); if (!todo.length) return;
+    if (S.phase === 'discard') todo.forEach(t => act(S, t.seat, t.a)); else act(S, todo[0].seat, todo[0].a);
+    afterChange();
+  }, 900 + Math.random() * 700);
+}
+function startBeat() { clearInterval(hb); hb = setInterval(() => { if (isHost && S && nr) broadcast(); else if (!isHost && S && view !== 'home') render(); }, 4000); }
+
+// ---------- jugador ----------
+function clientHandle(m, d) {
+  if (d.t === 's') {
+    if (probing) { collided = true; return; }
+    if (!d.s || d.s.code !== roomCode) return;
+    if (hostPeer && m.peer !== hostPeer && peerSet().has(hostPeer)) return;
+    if (S && S.hp === d.s.hp && d.s.v < S.v) return;
+    hostPeer = m.peer;
+    const seated = myPeer && d.s.seats.some(s => s && s.p === myPeer);
+    if (!seated) { if (S) S = null; helloSoon(); return; }
+    S = d.s; fillView(); render();
+  } else if (d.t === 'full') { if (d.p === myPeer) { fullFlag = true; leaveRoom('La sala está llena (máximo 4 jugadores).'); } }
+  else if (d.t === 'err') { if (d.p === myPeer) toast(d.m || 'Acción no permitida'); }
+  else if (d.t === 'sena') { showSena(d.f, d.s); }
+}
+function fillView() { const v = S.phase === 'lobby' ? 'lobby' : 'table'; if (view === 'guide') guideBack = v; else view = v; }
+function helloSoon() { if (Date.now() - helloT < 1500) return; helloT = Date.now(); emit({ t: 'hello', n: cleanName() }); }
+
+async function createRoom() {
+  if (!lobbyRoom) { toast('Las salas online no están disponibles en esta vista.'); return; }
+  busy('Creando sala…'); saveName();
+  let ok = false;
+  for (let i = 0; i < 3 && !ok; i++) {
+    const code = genCode();
+    try {
+      const r = await lobbyRoom.join('mus-' + code.toLowerCase());
+      attach(r); roomCode = code; probing = true; collided = false; emit({ t: 'probe' }); await sleep(1300); probing = false;
+      if (collided) { await r.leave(); nr = null; continue; }
+      ok = true;
+    } catch (e) { nr = null; probing = false; busy(''); toast('No se pudo crear la sala. Inténtalo de nuevo.'); return; }
+  }
+  busy('');
+  if (!ok) { toast('No se pudo crear la sala. Inténtalo de nuevo.'); return; }
+  S = newState(roomCode); S.seats[0] = { n: cleanName(), p: null, h: true };
+  isHost = true; hostPeer = myPeer; view = 'lobby'; startBeat(); afterChange();
+}
+async function joinRoom() {
+  const code = codeIn.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (code.length < 4) { toast('Escribe el código de la sala.'); return; }
+  if (!lobbyRoom) { toast('Las salas online no están disponibles en esta vista.'); return; }
+  busy('Buscando sala…'); saveName(); fullFlag = false;
+  try {
+    const r = await lobbyRoom.join('mus-' + code.toLowerCase());
+    attach(r); roomCode = code; hostPeer = null; isHost = false; S = null;
+    for (let i = 0; i < 5 && !S && !fullFlag; i++) { helloT = 0; helloSoon(); await sleep(1500); }
+    busy('');
+    if (fullFlag) return;
+    if (!S) { await leaveRoom('No encuentro ninguna sala con el código ' + code + '.'); return; }
+    startBeat();
+  } catch (e) { busy(''); await leaveRoom('No se pudo entrar en la sala.'); }
+}
+async function resumeHost() {
+  const d = savedHost(); if (!d || !lobbyRoom) return;
+  busy('Retomando sala…');
+  try {
+    const r = await lobbyRoom.join('mus-' + d.code.toLowerCase());
+    attach(r); roomCode = d.code; S = d.S;
+    S.seats.forEach(s => { if (s && s.p !== 'bot' && !s.h) s.p = null; });
+    isHost = true; hostPeer = null; view = S.phase === 'lobby' ? 'lobby' : 'table'; startBeat(); busy(''); afterChange();
+  } catch (e) { busy(''); toast('No se pudo retomar la sala.'); }
+}
+function startSolo() {
+  saveName(); nr = null; myPeer = 'local'; isHost = true; roomCode = 'SOLO';
+  S = newState('SOLO'); S.seats = [{ n: cleanName(), p: 'local', h: true }, null, null, null];
+  const names = BOTN.slice().sort(() => Math.random() - .5);
+  for (let i = 1; i < 4; i++) S.seats[i] = { n: names[i] + ' (bot)', p: 'bot' };
+  newGame(S); view = 'table'; startBeat(); afterChange();
+}
+async function leaveRoom(msg) {
+  clearInterval(hb); clearTimeout(botT); botT = 0;
+  const r = nr; nr = null;
+  if (r) { try { await r.leave(); } catch (e) {} }
+  if (isHost) clearHost();
+  S = null; isHost = false; hostPeer = null; roomCode = ''; selDisc = new Set(); swapSel = -1; senaShow = [];
+  view = 'home'; busy('');
+  if (msg) toast(msg); render();
+}
+function busy(m) { busyMsg = m; render(); }
+
+function send(a) {
+  if (!S) return;
+  if (isHost) { if (act(S, mySeat(), a)) afterChange(); }
+  else emit({ t: 'a', a });
+}
+
+// ---------- vistas ----------
+const isOnline = s => { const st = S.seats[s]; if (!st) return false; if (st.p === 'bot' || st.p === 'local' || st.h) return true; return !!st.p && peerSet().has(st.p); };
+function cardFace(id, extra) {
+  const r = rankOf(id), s = suitOf(id);
+  return '<div class="card f s' + s + ' ' + (extra || '') + '" role="img" aria-label="' + RN[r] + ' de ' + SUIT_L[s] + '"><b class="n">' + r + '</b><svg class="su" aria-hidden="true"><use href="#su' + s + '"/></svg><i class="nn">' + RN[r] + '</i></div>';
+}
+const cardBack = () => '<div class="card bk" aria-hidden="true"></div>';
+
+function renderNav() {
+  const st = nr ? '<span class="pill ' + (connected ? 'on' : 'off') + '"><i></i>' + esc(roomCode) + (connected ? ' · en línea' : ' · sin conexión') + '</span>' : (S && roomCode === 'SOLO' ? '<span class="pill"><i></i>Partida contra bots</span>' : '');
+  $nav.innerHTML = st + (view === 'guide'
+    ? '<button class="btn ghost sm" data-a="guideBack">Volver</button>'
+    : '<button class="btn ghost sm" data-a="guide">Reglas</button>') + (S ? '<button class="btn ghost sm" data-a="leave">Salir</button>' : '');
+}
+
+function renderHome() {
+  const sv = savedHost();
+  let net;
+  if (roomAvail === null) net = '<p class="note">Comprobando conexión con las salas…</p>';
+  else if (!roomAvail) net = '<div class="warn">Las salas online no están disponibles en esta vista. Para jugar con otras personas, cada jugador tiene que abrir esta página con su sesión de claude.ai y con permiso de colaborador. Mientras tanto puedes practicar contra bots.</div>';
+  else net = '<p class="note">Cada jugador abre esta página, escribe su nombre y entra con el mismo código. Máximo 4 jugadores, en 2 parejas.</p>';
+  const dis = roomAvail ? '' : ' disabled';
+  return '<section class="hero"><h1>Mus vasco a 4 reyes</h1><p>Mesa para cuatro con grande, chica, pares y juego, mus y descarte, envites, órdago, piedras y amarracos. Crea una sala, pasa el código y a jugar.</p></section>' +
+    '<section class="panel col"><label class="f">Tu nombre<input type="text" id="inName" maxlength="14" autocomplete="nickname" placeholder="Ane" value="' + esc(myName) + '"></label>' + net + '</section>' +
+    '<div class="grid2">' +
+    '<section class="panel col"><h2>Crear sala</h2><p class="note">Serás el anfitrión: decides parejas, bots y a cuántas piedras se juega.</p><button class="btn" data-a="create"' + dis + '>Crear sala</button>' +
+    (sv && roomAvail ? '<button class="btn ghost" data-a="resume">Retomar sala ' + esc(sv.code) + '</button>' : '') + '</section>' +
+    '<section class="panel col"><h2>Unirse con código</h2><label class="f">Código de sala<input type="text" id="inCode" class="codein" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="K7M2Q" value="' + esc(codeIn) + '"></label><button class="btn" data-a="join"' + dis + '>Entrar</button></section>' +
+    '</div>' +
+    '<section class="panel col"><h2>Practicar solo</h2><p class="note">Una partida completa contra tres bots, sin salas ni conexión.</p><div class="btns"><button class="btn gold" data-a="solo">Jugar contra bots</button><button class="btn ghost" data-a="guide">Leer las reglas</button></div></section>' +
+    (busyMsg ? '<div class="warn">' + esc(busyMsg) + '</div>' : '');
+}
+
+function slot(i) {
+  const st = S.seats[i], mine = i === mySeat();
+  let who, ctl = '';
+  if (!st) who = '<div class="who">Asiento libre<small>Esperando jugador</small></div>';
+  else who = '<div class="who"><i class="dot ' + (isOnline(i) ? 'on' : 'off') + '"></i>' + esc(st.n) + '<small>' + (st.h ? 'Anfitrión' : st.p === 'bot' ? 'Bot' : mine ? 'Tú' : isOnline(i) ? 'Jugador' : 'Desconectado') + '</small></div>';
+  if (isHost) {
+    if (!st) ctl += '<button class="btn ghost sm" data-a="addbot" data-s="' + i + '">Añadir bot</button>';
+    else if (st.p === 'bot') ctl += '<button class="btn ghost sm" data-a="rmbot" data-s="' + i + '">Quitar</button>';
+    if (swapSel < 0) { if (st) ctl += '<button class="btn ghost sm" data-a="swap" data-s="' + i + '">Mover</button>'; }
+    else ctl += '<button class="btn ' + (swapSel === i ? 'gold' : 'ghost') + ' sm" data-a="swap" data-s="' + i + '">' + (swapSel === i ? 'Cancelar' : 'Aquí') + '</button>';
+  }
+  return '<div class="slot ' + (st ? '' : 'empty ') + (swapSel === i ? 'sel' : '') + '">' + who + '<div class="ctl">' + ctl + '</div></div>';
+}
+function renderLobby() {
+  const full = S.seats.every(Boolean);
+  const cfg = isHost
+    ? '<div class="grid2"><label class="f">Piedras por juego<select id="cfgTarget"><option value="30"' + (S.cfg.target === 30 ? ' selected' : '') + '>30 (6 amarracos)</option><option value="40"' + (S.cfg.target === 40 ? ' selected' : '') + '>40 (8 amarracos)</option></select></label>' +
+      '<label class="f">Vaca<select id="cfgJuegos"><option value="1"' + (S.cfg.juegos === 1 ? ' selected' : '') + '>1 juego</option><option value="3"' + (S.cfg.juegos === 3 ? ' selected' : '') + '>Mejor de 3 juegos</option></select></label></div>'
+    : '<p class="note">Se juega a ' + S.cfg.target + ' piedras (' + S.cfg.target / 5 + ' amarracos) · ' + (S.cfg.juegos === 1 ? 'un solo juego' : 'mejor de 3 juegos') + '.</p>';
+  const foot = isHost
+    ? '<div class="btns"><button class="btn" data-a="start"' + (full ? '' : ' disabled') + '>Empezar partida</button><button class="btn ghost" data-a="shuffle">Mezclar asientos</button></div>' + (full ? '' : '<p class="note">Faltan jugadores: invita a tus compañeros o añade bots.</p>')
+    : '<p class="note">Esperando a que el anfitrión empiece la partida.</p>';
+  return '<section class="panel col" style="align-items:center;text-align:center"><span class="note" style="font-weight:700;letter-spacing:.12em;text-transform:uppercase">Código de sala</span><div class="code">' + esc(S.code) + '</div>' +
+    (roomCode === 'SOLO' ? '' : '<p class="note">Los demás jugadores abren esta página, pulsan «Unirse con código» y escriben ' + esc(S.code) + '.</p><button class="btn ghost sm" data-a="copy">Copiar código</button>') + '</section>' +
+    '<section class="panel col"><h2>Parejas</h2><div class="pairs"><div class="pair t0"><h3>Pareja 1 · frente a frente</h3>' + slot(0) + slot(2) + '</div><div class="pair t1"><h3>Pareja 2 · frente a frente</h3>' + slot(1) + slot(3) + '</div></div>' +
+    (isHost ? '<p class="note">Pulsa «Mover» en un asiento y luego «Aquí» en otro para intercambiarlos. Los compañeros se sientan enfrente.</p>' : '') + '</section>' +
+    '<section class="panel col"><h2>Reglas de la sala</h2>' + cfg + foot + '</section>';
+}
+
+function seatBlock(s, rel) {
+  const st = S.seats[s], me = mySeat(), h = S.hands[s] || [];
+  const turn = S.turn === s || (S.phase === 'discard' && !S.disc[s]);
+  const show = s === me || S.reveal;
+  let cards = '';
+  if (s === me && S.phase === 'discard' && !S.disc[s]) cards = h.map((c, i) => '<button class="cardbtn ' + (selDisc.has(i) ? 'sel' : '') + '" data-a="tog" data-i="' + i + '" aria-pressed="' + selDisc.has(i) + '">' + cardFace(c) + '</button>').join('');
+  else cards = h.map(c => show ? cardFace(c) : cardBack()).join('');
+  const tags = [S.mano === s ? 'mano' : '', S.dealer === s ? 'postre' : ''].filter(Boolean).join(' · ');
+  const sn = senaShow.filter(x => x.f === s).map(x => '<div class="bubble">Seña: ' + esc(SENAS[x.k].t) + '</div>').join('');
+  let tobot = '';
+  if (isHost && st && st.p !== 'bot' && !st.h && !isOnline(s)) tobot = '<button class="btn gold sm" data-a="tobot" data-s="' + s + '">Pasar a bot</button>';
+  return '<div class="seat p' + rel + ' team' + (s % 2) + (turn ? ' turn' : '') + '">' + sn +
+    '<div class="nm"><span><i class="dot ' + (isOnline(s) ? 'on' : 'off') + '"></i>' + esc(st ? st.n : '—') + '</span>' + (tags ? '<em>' + tags + '</em>' : '') + '</div><div class="tm"></div>' +
+    '<div class="hand ' + (show && s !== me ? 'rv' : '') + '">' + cards + '</div>' + tobot + '</div>';
+}
+function chips() {
+  return [0, 1, 2, 3].map(l => {
+    const r = S.lr[l], cur = S.phase === 'play' && S.lance === l;
+    let st = '';
+    if (cur) st = 'ahora'; else if (r) st = { pass: 'paso', acc: 'envite ' + (r.st || ''), fold: 'no quiero', uno: 'sin envite', none: 'nadie', og: 'órdago' }[r.k] || '';
+    return '<div class="chip ' + (cur ? 'cur' : '') + '"><b>' + (l === 3 && S.punto ? 'Punto' : LN[l]) + '</b><small>' + st + '</small></div>';
+  }).join('');
+}
+const E_ = s => esc(nm(S, s));
+function statusAndActions() {
+  const me = mySeat(), mine = S.turn === me;
+  let title = '', sub = '', btns = '';
+  if (S.phase === 'mus') {
+    title = mine ? 'Te toca: ¿mus?' : 'Habla ' + E_(S.turn) + ': ¿mus?';
+    sub = 'Si los cuatro decís mus, cada uno descarta de 1 a 4 cartas. Un «no hay mus» corta y se juega.';
+    if (mine) btns = '<button class="btn" data-a="mus" data-y="1">Mus</button><button class="btn ghost" data-a="mus" data-y="0">No hay mus</button>';
+  } else if (S.phase === 'discard') {
+    const left = S.disc.filter(x => !x).length;
+    if (!S.disc[me]) {
+      title = 'Elige las cartas que descartas'; sub = 'Toca las cartas de tu mano y confirma. Faltan por decidir: ' + left + '.';
+      btns = '<button class="btn" data-a="disc"' + (selDisc.size ? '' : ' disabled') + '>Descartar ' + selDisc.size + (selDisc.size === 1 ? ' carta' : ' cartas') + '</button>';
+    } else { title = 'Descarte hecho'; sub = 'Esperando a los demás jugadores (' + left + ').'; }
+  } else if (S.phase === 'play' && S.b) {
+    const b = S.b, ln = S.lance === 3 && S.punto ? 'Punto' : LN[S.lance];
+    if (b.mode === 'open') {
+      title = mine ? 'Tu turno en ' + ln : 'Turno de ' + E_(S.turn) + ' en ' + ln;
+      sub = 'Paso, envido o órdago. ' + (S.lance >= 2 && !S.punto ? 'Juegan solo quienes tienen ' + ln.toLowerCase() + '.' : '');
+      if (mine) btns = '<button class="btn ghost" data-a="bet" data-k="paso">Paso</button><span class="grp"><span class="stp"><button data-a="step" data-d="-1" aria-label="Menos">−</button><b>' + stepN + '</b><button data-a="step" data-d="1" aria-label="Más">+</button></span><button class="btn" data-a="bet" data-k="env">Envido ' + stepN + '</button></span><button class="btn gold" data-a="bet" data-k="og">¡Órdago!</button>';
+    } else {
+      const who = nm(S, b.last);
+      title = b.og ? '¡Órdago de ' + esc(who) + '!' : esc(who) + ' envida ' + b.stake;
+      sub = mine ? 'Responde por tu pareja: tu respuesta la compromete.' : 'Responde ' + E_(S.turn) + '.';
+      if (mine) btns = '<button class="btn" data-a="bet" data-k="q">' + (b.og ? 'Quiero (todo el juego)' : 'Quiero') + '</button><button class="btn ghost" data-a="bet" data-k="nq">No quiero</button>' +
+        (b.og ? '' : '<span class="grp"><span class="stp"><button data-a="step" data-d="-1" aria-label="Menos">−</button><b>' + stepN + '</b><button data-a="step" data-d="1" aria-label="Más">+</button></span><button class="btn" data-a="bet" data-k="env">Subir a ' + Math.min(b.stake + stepN, S.cfg.target) + '</button></span><button class="btn gold" data-a="bet" data-k="og">¡Órdago!</button>');
+    }
+  } else if (S.phase === 'recuento' || S.phase === 'over') {
+    const over = S.phase === 'over';
+    title = over ? '¡Fin de la partida!' : 'Recuento de la mano ' + S.hn;
+    sub = over && S.fin ? 'Ganan ' + esc(tn(S, S.fin.team)) + '.' : 'Se enseñan las cartas y se cuentan las piedras.';
+    btns = over ? (isHost ? '<button class="btn" data-a="again">Nueva partida</button>' : '<span class="note">El anfitrión puede empezar otra partida.</span>') : '<button class="btn" data-a="next">Siguiente mano</button>';
+  }
+  const res = (S.phase === 'recuento' || S.phase === 'over') && S.res.length ? '<ul class="res">' + S.res.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '';
+  let senas = '';
+  if (['mus', 'discard', 'play'].includes(S.phase)) {
+    senas = '<div class="col"><button class="btn ghost sm" data-a="senas" style="align-self:flex-start">' + (showSenas ? 'Ocultar señas' : 'Señas a mi compañero') + '</button>' +
+      (showSenas ? '<div class="senas">' + Object.keys(SENAS).map(k => '<button class="btn ghost sm" data-a="sena" data-k="' + k + '">' + esc(SENAS[k].t) + '</button>').join('') + '</div><p class="note">Solo ve la seña tu compañero y solo puedes enviar señas verdaderas.</p>' : '') + '</div>';
+  }
+  return '<section class="panel bar"><h2>' + title + '</h2><p class="sub">' + sub + '</p>' + (btns ? '<div class="btns">' + btns + '</div>' : '') + res + senas + '</section>';
+}
+function teamCard(t) {
+  const p = S.sc[t], groups = S.cfg.target / 5, need = (S.cfg.juegos + 1) / 2;
+  let ams = '';
+  for (let g = 0; g < groups; g++) { let d = ''; for (let k = 0; k < 5; k++) d += '<i class="' + (g * 5 + k < p ? 'on' : '') + '"></i>'; ams += '<span class="am">' + d + '</span>'; }
+  let vc = ''; if (S.cfg.juegos > 1) { vc = '<div class="vaca">Juegos '; for (let i = 0; i < need; i++) vc += '<i class="' + (S.jw[t] > i ? 'on' : '') + '"></i>'; vc += '</div>'; }
+  return '<div class="team t' + t + '"><div class="tn">' + esc(tn(S, t)) + '</div><div class="score"><b>' + p + '</b><span>de ' + S.cfg.target + ' piedras</span></div><div class="ams" title="Cada bloque es un amarraco (5 piedras)">' + ams + '</div>' + vc + '</div>';
+}
+function renderTable() {
+  const me = mySeat();
+  if (me < 0) { helloSoon(); return '<section class="panel col"><h2>Reconectando con la mesa…</h2><p class="note">Si tarda, comprueba que el anfitrión sigue conectado.</p></section>'; }
+  const rel = s => (s - me + 4) % 4;
+  let seats = ''; for (let s = 0; s < 4; s++) seats += seatBlock(s, rel(s));
+  const b = S.b;
+  const bet = S.phase === 'play' && b && b.mode === 'resp' ? '<div class="bet">' + (b.og ? '¡Órdago!' : 'Envite: ' + b.stake) + '</div>' : '';
+  const gone = !isHost && nr && hostPeer && Date.now() - joinedAt > 4000 && !peerSet().has(hostPeer);
+  const myh = S.hands[me] || [];
+  return (gone ? '<div class="bad">El anfitrión se ha desconectado. La partida continuará si vuelve a abrir la sala.</div>' : '') +
+    '<section class="felt" aria-label="Mesa de mus">' + seats + '<div class="mid"><div class="chips">' + chips() + '</div>' + bet + '</div></section>' +
+    (myh.length === 4 && S.phase !== 'recuento' && S.phase !== 'over' ? '<p class="note" style="text-align:center">Tu mano: <b>' + esc(describe(myh)) + '</b></p>' : '') +
+    statusAndActions() +
+    '<div class="side"><section class="panel col"><h3>Marcador</h3>' + teamCard(0) + teamCard(1) + '</section><section class="panel col"><h3>Mesa</h3><ul class="logl">' + S.log.slice().reverse().map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></section></div>';
+}
+
+// ---------- guía de reglas ----------
+function mini(ids) { return '<span class="mini">' + ids.map(i => cardFace(i)).join('') + '</span>'; }
+const cid = (suit, rank) => suit * 10 + RANKS.indexOf(rank);
+const GUIDE = {
+  basico: ['Lo básico', function () { return '<h2>Lo básico</h2>' +
+    '<ul><li>Se juega con la baraja española de 40 cartas: oros, copas, espadas y bastos, sin ochos ni nueves.</li>' +
+    '<li>Son cuatro jugadores en dos parejas. Los compañeros se sientan frente a frente.</li>' +
+    '<li>El reparto y el turno van hacia la derecha. El <b>mano</b> es quien está a la derecha del repartidor y habla primero. El repartidor es el <b>postre</b> y habla último. En cada mano el reparto pasa al siguiente jugador.</li>' +
+    '<li>Se reparten 4 cartas a cada uno. Se juegan cuatro lances por orden: grande, chica, pares y juego (o punto).</li></ul>' +
+    '<h3>Mus a 4 reyes</h3><ul><li>Solo los cuatro reyes son reyes. El 3 y el 2 valen lo que marcan. A 8 reyes, en cambio, los treses cuentan como reyes y los doses como ases.</li>' +
+    '<li>Rey, caballo y sota valen 10 para el juego. El resto vale su número y el as vale 1.</li>' +
+    '<li>Orden de las cartas, de la más alta a la más baja: ' + mini([cid(0, 12), cid(1, 11), cid(2, 10), cid(3, 7), cid(0, 6), cid(1, 5), cid(2, 4), cid(3, 3), cid(0, 2), cid(1, 1)]) + '</li></ul>' +
+    '<h3>Mus y descarte</h3><ul><li>Empezando por el mano, cada jugador dice «mus» o «no hay mus».</li><li>Si los cuatro dicen mus, cada uno descarta de 1 a 4 cartas y recibe otras tantas. Después se vuelve a preguntar.</li><li>En cuanto alguien dice «no hay mus», nadie descarta y se juega con lo que hay en la mano.</li></ul>' +
+    '<h3>A cuánto se juega</h3><ul><li>Un <b>juego</b> se gana al llegar a 30 piedras (6 amarracos) o a 40 piedras (8 amarracos). En esta mesa lo elige el anfitrión.</li><li>Una <b>vaca</b> reúne varios juegos: aquí, el mejor de 3.</li><li>Variantes por zona: el reglamento vasco juega a 4 reyes; en Gipuzkoa se juega mayoritariamente a 4 reyes con juego de 6 amarracos, y en Álava y Bizkaia se juega a 8 reyes y 40 tantos.</li></ul>'; }],
+  lances: ['Lances', function () { return '<h2>Los lances</h2><dl class="kv">' +
+    '<dt>Grande</dt><dd>Gana quien tiene las cartas más altas, comparando de mayor a menor: rey, caballo, sota, 7…</dd>' +
+    '<dt>Chica</dt><dd>Gana quien tiene las cartas más bajas: primero ases, luego doses, treses…</dd>' +
+    '<dt>Pares</dt><dd>Hay tres categorías. <b>Pareja</b>: dos cartas iguales. <b>Medias</b>: tres iguales. <b>Duples</b>: dos parejas o cuatro iguales. Gana la categoría más alta y, si empatan, las cartas más altas.</dd>' +
+    '<dt>Juego</dt><dd>Se suman los valores de las cuatro cartas. Tienen juego los que llegan a 31 o más. El orden, de mejor a peor, es 31, 32, 40, 37, 36, 35, 34 y 33.</dd>' +
+    '<dt>Punto</dt><dd>Si nadie tiene juego se juega al punto: gana la suma más cercana a 30 sin pasarse (30 es la mejor, hasta 4).</dd></dl>' +
+    '<h3>Empates y quién juega</h3><ul><li>En caso de empate gana el jugador más cercano al mano.</li><li>En pares y juego solo se apuesta si al menos un jugador de cada pareja lo tiene. Si solo lo tiene una pareja, se lleva sus puntos sin apostar. Si nadie lo tiene, se pasa al siguiente lance.</li><li>La palabra hace juego: en esta mesa los «tengo / no tengo» se declaran solos y siempre son verdad.</li></ul>'; }],
+  puntos: ['Puntos', function () { return '<h2>Cuenta de piedras</h2><p>Una piedra es un tanto. Un <b>amarraco</b> son 5 piedras: el marcador agrupa las piedras de cinco en cinco.</p>' +
+    '<div class="tblw"><table><thead><tr><th>Lance</th><th>Sin envite</th></tr></thead><tbody>' +
+    '<tr><td>Grande</td><td><b>1</b> piedra para la mejor grande</td></tr><tr><td>Chica</td><td><b>1</b> piedra para la mejor chica</td></tr>' +
+    '<tr><td>Pares</td><td>Por cada jugador de la pareja ganadora que tenga pares: pareja <b>1</b>, medias <b>2</b>, duples <b>3</b></td></tr>' +
+    '<tr><td>Juego</td><td>Por cada jugador de la pareja ganadora con juego: <b>3</b> con 31 y <b>2</b> con cualquier otro juego</td></tr>' +
+    '<tr><td>Punto</td><td><b>1</b> piedra para el mejor punto</td></tr></tbody></table></div>' +
+    '<h3>Recuento</h3><ul><li>Al terminar la mano se enseñan las cartas y se cuenta en orden: grande, chica, pares y juego (o punto).</li><li>Si hubo envite aceptado, la pareja que gana el lance cobra lo apostado. En pares y juego cobra además los puntos de sus pares o de su juego.</li><li>La primera pareja que llega al objetivo gana el juego en el acto, aunque queden lances por contar.</li><li>Los «no quiero» se cobran en el momento.</li></ul>'; }],
+  envites: ['Envites', function () { return '<h2>Envites y órdago</h2><ul>' +
+    '<li>Al llegar su turno en un lance, cada jugador puede <b>pasar</b>, <b>envidar</b> o lanzar un <b>órdago</b>. El envite mínimo es de 2 piedras.</li>' +
+    '<li>Quien recibe un envite responde <b>quiero</b>, <b>no quiero</b> o sube la apuesta. En esta mesa responde el primer rival al que le toca hablar y su respuesta compromete a su pareja.</li>' +
+    '<li>Con <b>no quiero</b>, quien envidó se lleva en el acto lo apostado antes del último envite, o 1 piedra si era el primero (el «deje»). El lance se da por ganado y se sigue con el siguiente.</li>' +
+    '<li>Si todos pasan en un lance sin envite, ese lance se cuenta con su valor sin apuesta.</li>' +
+    '<li>El <b>órdago</b> pone en juego todo el juego. Si se acepta, se enseñan las cartas del lance y quien lo gane gana el juego en el momento. Si no se acepta, el que lo lanzó cobra 1 piedra (o lo anterior si venía de una subida) y se sigue jugando.</li></ul>'; }],
+  senas: ['Señas', function () { return '<h2>Señas</h2><ul><li>En el mus vasco se permiten las señas entre compañeros, pero no se puede mentir. Una seña falsa se castiga, en el reglamento tradicional, con la pérdida del juego.</li>' +
+    '<li>Señas tradicionales: morderse el labio inferior (dos reyes), guiñar un ojo (31), cerrar los ojos (ciego, sin pares ni juego) y lanzar un beso al aire (tres reyes y un as).</li></ul>' +
+    '<h3>En esta mesa</h3><ul><li>Pulsa «Señas a mi compañero» y elige una. Solo la ve tu compañero.</li><li>Solo puedes enviar señas verdaderas: 31, duples, medias, pareja, ciego, dos reyes y tres reyes. Si la seña sería falsa, la mesa no la envía.</li></ul>'; }],
+  glosario: ['Glosario', function () { return '<h2>Glosario</h2><dl class="kv">' +
+    '<dt>Amarraco</dt><dd>Grupo de 5 piedras en el marcador.</dd><dt>Piedra</dt><dd>Un tanto.</dd>' +
+    '<dt>Órdago</dt><dd>Apuesta de todo el juego. Viene del vasco «hor dago», «ahí está».</dd>' +
+    '<dt>Mano</dt><dd>Jugador a la derecha del repartidor. Habla primero y gana los empates.</dd><dt>Postre</dt><dd>El repartidor. Habla último.</dd>' +
+    '<dt>Envido</dt><dd>Apuesta de 2 piedras o más.</dd><dt>Deje</dt><dd>La piedra que se cobra cuando no se acepta el primer envite.</dd>' +
+    '<dt>Duples</dt><dd>Dos parejas o cuatro cartas iguales.</dd><dt>Medias</dt><dd>Tres cartas iguales.</dd><dt>Ciego</dt><dd>Mano sin pares ni juego.</dd>' +
+    '<dt>Vaca</dt><dd>Conjunto de juegos; se gana al ganar la mayoría.</dd><dt>Mus visto</dt><dd>Variante en la que el repartidor enseña una carta. No se juega aquí.</dd></dl>'; }]
+};
+function renderGuide() {
+  return '<section class="panel col"><div class="tabs" role="tablist">' + Object.keys(GUIDE).map(k => '<button class="tab" role="tab" aria-selected="' + (k === guideTab) + '" data-a="gtab" data-k="' + k + '">' + GUIDE[k][0] + '</button>').join('') + '</div><div class="guide">' + GUIDE[guideTab][1]() + '</div></section>';
+}
+
+function render() {
+  renderNav();
+  let html = '';
+  if (view === 'guide') html = renderGuide();
+  else if (view === 'home' || !S) html = renderHome();
+  else if (view === 'lobby') html = renderLobby();
+  else html = renderTable();
+  const ae = document.activeElement, keep = ae && ae.id && (ae.id === 'inName' || ae.id === 'inCode') ? ae.id : null;
+  if (keep && view === 'home' && !busyMsg && roomAvail === (renderHome.last)) return;
+  renderHome.last = roomAvail;
+  $app.innerHTML = html;
+  if (keep) { const el = document.getElementById(keep); if (el) { el.focus(); const n = el.value.length; try { el.setSelectionRange(n, n); } catch (e) {} } }
+}
+
+// ---------- eventos ----------
+const H = {
+  create: createRoom, join: joinRoom, solo: startSolo, resume: resumeHost,
+  guide() { guideBack = view; view = 'guide'; render(); },
+  guideBack() { view = guideBack || 'home'; if (!S && view !== 'home') view = 'home'; render(); },
+  gtab(d) { guideTab = d.k; render(); },
+  leave() { leaveRoom(); },
+  copy() { try { navigator.clipboard.writeText(S.code).then(() => toast('Código copiado'), () => toast('Copia el código a mano: ' + S.code)); } catch (e) { toast('Copia el código a mano: ' + S.code); } },
+  addbot(d) { if (!isHost) return; const i = +d.s; if (S.seats[i]) return; const used = S.seats.filter(Boolean).map(s => s.n); const n = BOTN.find(x => !used.includes(x + ' (bot)')) || 'Bot'; S.seats[i] = { n: n + ' (bot)', p: 'bot' }; afterChange(); },
+  rmbot(d) { if (!isHost) return; const i = +d.s; if (S.seats[i] && S.seats[i].p === 'bot') { S.seats[i] = null; afterChange(); } },
+  swap(d) {
+    if (!isHost) return; const i = +d.s;
+    if (swapSel < 0) { swapSel = i; render(); return; }
+    if (swapSel !== i) { const t = S.seats[swapSel]; S.seats[swapSel] = S.seats[i]; S.seats[i] = t; }
+    swapSel = -1; afterChange();
+  },
+  shuffle() { if (!isHost) return; S.seats = shuffleArr(S.seats); swapSel = -1; afterChange(); },
+  start() { if (isHost && S.seats.every(Boolean)) { newGame(S); selDisc = new Set(); afterChange(); } },
+  tobot(d) { if (!isHost) return; const i = +d.s, st = S.seats[i]; if (st && st.p !== 'bot' && !st.h) { S.seats[i] = { n: st.n + ' (bot)', p: 'bot' }; afterChange(); } },
+  mus(d) { send({ a: 'mus', y: d.y === '1' }); },
+  tog(d) { const i = +d.i; if (selDisc.has(i)) selDisc.delete(i); else selDisc.add(i); render(); },
+  disc() { if (!selDisc.size) return; const c = Array.from(selDisc); selDisc = new Set(); send({ a: 'disc', c }); },
+  step(d) { stepN = Math.max(2, Math.min(20, stepN + (+d.d))); render(); },
+  bet(d) { const a = { a: 'bet', k: d.k }; if (d.k === 'env') a.n = stepN; send(a); },
+  next() { send({ a: 'next' }); },
+  again() { if (isHost) { send({ a: 'again' }); selDisc = new Set(); } },
+  senas() { showSenas = !showSenas; render(); },
+  sena(d) { if (isHost) doSena(mySeat(), d.k); else emit({ t: 'sena', s: d.k }); }
+};
+$app.addEventListener('click', e => { const t = e.target.closest('[data-a]'); if (!t || t.disabled) return; const f = H[t.dataset.a]; if (f) f(t.dataset); });
+$nav.addEventListener('click', e => { const t = e.target.closest('[data-a]'); if (!t) return; const f = H[t.dataset.a]; if (f) f(t.dataset); });
+$app.addEventListener('input', e => {
+  if (e.target.id === 'inName') { myName = e.target.value; saveName(); }
+  else if (e.target.id === 'inCode') { codeIn = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6); e.target.value = codeIn; }
+});
+$app.addEventListener('change', e => {
+  if (!isHost || !S) return;
+  if (e.target.id === 'cfgTarget') { S.cfg.target = +e.target.value === 40 ? 40 : 30; afterChange(); }
+  else if (e.target.id === 'cfgJuegos') { S.cfg.juegos = +e.target.value === 1 ? 1 : 3; afterChange(); }
+});
+$app.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'inCode') joinRoom(); });
+
+async function initRoom() {
+  try { if (window.claude && window.claude.use) lobbyRoom = await window.claude.use('room'); } catch (e) { lobbyRoom = null; }
+  roomAvail = !!lobbyRoom; if (view === 'home') render();
+}
+render(); initRoom();
+})();
+</script>
+
+</body></html>
