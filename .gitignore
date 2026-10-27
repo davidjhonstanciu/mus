@@ -1,0 +1,12 @@
+# Dependencies and local environment
+/node_modules
+/.env
+/.env.*
+!/.env.example
+
+# Build outputs and local TypeScript cache
+/dist
+*.tsbuildinfo
+
+# Local deployment metadata
+.vercel
